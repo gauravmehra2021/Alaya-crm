@@ -107,7 +107,7 @@ export const OTPScreen: React.FC<OTPScreenProps> = ({ onVerifySuccess, onBack })
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-12 h-14 text-center text-xl bg-input-background border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-10 h-11  md:w-12 md:h-14 text-center text-xl bg-input-background border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                 ))}
               </div>
