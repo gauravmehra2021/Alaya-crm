@@ -22,13 +22,13 @@ export const AppRoutes = () => {
     <Routes>
 
       {/* Public Routes */}
-      {/* <Route element={<ProtectedPublicRoute />}> */}
+      <Route element={<ProtectedPublicRoute />}>
         <Route path="/" element={<LoginScreen />} />
         <Route path="/otp" element={<OTPScreen />} />
-      {/* </Route> */}
+      </Route>
 
       {/* Private Routes with Layout */}
-      {/* <Route element={<ProtectedPrivateRoute />}> */}
+      <Route element={<ProtectedPrivateRoute />}>
         <Route element={<MainLayout />}>
           
           <Route path="/dashboard" element={<DashboardScreen />} />
@@ -40,7 +40,7 @@ export const AppRoutes = () => {
           <Route path="/settings" element={<SettingsScreen />} />
 
         </Route>
-      {/* </Route> */}
+      </Route>
 
     </Routes>
   );
