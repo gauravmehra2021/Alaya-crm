@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export type NavigationItem =
   | 'Dashboard'
@@ -38,11 +39,12 @@ const navigationItems = [
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, collapsed, onToggleCollapse }) => {
+  let navigate = useNavigate();
+  console.log("activeTabactiveTab", activeTab)
   return (
     <div
-      className={`${
-        collapsed ? 'w-20' : 'w-64'
-      } bg-sidebar border-r border-sidebar-border flex flex-col transition-all duration-300`}
+      className={`${collapsed ? 'w-20' : 'w-64'
+        } bg-sidebar border-r border-sidebar-border flex flex-col transition-all duration-300`}
     >
       <div className="p-6 border-b border-sidebar-border flex items-center justify-between">
         {!collapsed && (
@@ -71,12 +73,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, collap
           return (
             <button
               key={item.id}
-              onClick={() => onTabChange(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                isActive
+              onClick={() => {
+
+                onTabChange(item.id)
+                navigate(`/${item.id.toLowerCase()}`)
+              }
+              }
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
                   ? 'bg-sidebar-primary text-sidebar-primary-foreground'
                   : 'text-sidebar-foreground hover:bg-sidebar-accent'
-              }`}
+                }`}
               title={collapsed ? item.label : undefined}
             >
               <Icon className="w-5 h-5 flex-shrink-0" />

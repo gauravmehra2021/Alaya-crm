@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Smartphone, Mail, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface OTPScreenProps {
   onVerifySuccess: () => void;
   onBack: () => void;
 }
 
-export const OTPScreen: React.FC<OTPScreenProps> = ({ onVerifySuccess, onBack }) => {
+export const OTPScreen: React.FC = () => {
   const { verifyOTP, pendingAuth } = useAuth();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  let navigate = useNavigate();
   const handleChange = (index: number, value: string) => {
     if (value.length > 1) return;
     if (!/^\d*$/.test(value)) return;
@@ -48,7 +49,7 @@ export const OTPScreen: React.FC<OTPScreenProps> = ({ onVerifySuccess, onBack })
     try {
       const success = await verifyOTP(otpValue);
       if (success) {
-        onVerifySuccess();
+          navigate("/dashboard");
       } else {
         setError('Invalid OTP code. Please try again.');
       }
@@ -58,6 +59,11 @@ export const OTPScreen: React.FC<OTPScreenProps> = ({ onVerifySuccess, onBack })
       setLoading(false);
     }
   };
+
+
+  const onBack =()=>{
+      navigate("/");
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">

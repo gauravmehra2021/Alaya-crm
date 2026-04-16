@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from './AuthContext';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
-interface LoginScreenProps {
-  onLoginSuccess: () => void;
-}
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
+
+export const LoginScreen: React.FC = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
     try {
       const success = await login(email, password);
       if (success) {
-        onLoginSuccess();
+          navigate("otp");
       } else {
         setError('Invalid email or password');
       }
