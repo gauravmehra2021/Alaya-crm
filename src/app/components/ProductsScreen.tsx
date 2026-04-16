@@ -111,25 +111,25 @@ export const ProductsScreen: React.FC<ProductsScreenProps> = ({ userRole }) => {
   const canEdit = userRole === 'Admin' || userRole === 'Manager';
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl text-foreground mb-1">Products & Services</h1>
-          <p className="text-muted-foreground">Manage your clinic offerings and pricing</p>
+          <h1 className="text-xl md:text-2xl text-foreground mb-1">Products & Services</h1>
+          <p className="text-sm text-muted-foreground">Manage your clinic offerings and pricing</p>
         </div>
         {canEdit && (
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Add Item
+            <span className="hidden sm:inline">Add Item</span>
           </button>
         )}
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="flex flex-col md:flex-row gap-3 mb-4 md:mb-6">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
@@ -151,12 +151,12 @@ export const ProductsScreen: React.FC<ProductsScreenProps> = ({ userRole }) => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="bg-background border border-border rounded-xl p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary" />
+            <div key={product.id} className="bg-background border border-border rounded-xl p-4 md:p-6">
+              <div className="flex items-start justify-between mb-3">
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <Package className="w-5 h-5 text-primary" />
                 </div>
                 <span
                   className={`px-3 py-1 rounded-full text-xs ${
@@ -168,12 +168,12 @@ export const ProductsScreen: React.FC<ProductsScreenProps> = ({ userRole }) => {
                   {product.type}
                 </span>
               </div>
-              <div className="mb-4">
-                <h3 className="text-foreground mb-2">{product.name}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
+              <div className="mb-3">
+                <h3 className="text-sm text-foreground mb-1">{product.name}</h3>
+                <p className="text-xs text-muted-foreground line-clamp-2">{product.description}</p>
               </div>
-              <div className="mb-4 pb-4 border-b border-border">
-                <div className="text-2xl text-primary">AED {product.price.toLocaleString()}</div>
+              <div className="mb-3 pb-3 border-b border-border">
+                <div className="text-lg text-primary">AED {product.price.toLocaleString()}</div>
               </div>
               {canEdit && (
                 <div className="flex gap-2">

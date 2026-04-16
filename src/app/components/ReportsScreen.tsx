@@ -27,91 +27,91 @@ export const ReportsScreen: React.FC = () => {
   const [dateRange, setDateRange] = useState('last-6-months');
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl text-foreground mb-1">Reports & Analytics</h1>
-          <p className="text-muted-foreground">Comprehensive performance insights</p>
+          <h1 className="text-xl md:text-2xl text-foreground mb-1">Reports & Analytics</h1>
+          <p className="text-sm text-muted-foreground">Comprehensive performance insights</p>
         </div>
         <div className="flex gap-2">
           <select
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value)}
-            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="flex-1 sm:flex-none px-3 py-2 text-sm bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="last-30-days">Last 30 Days</option>
             <option value="last-3-months">Last 3 Months</option>
             <option value="last-6-months">Last 6 Months</option>
             <option value="this-year">This Year</option>
           </select>
-          <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
             <Download className="w-4 h-4" />
-            Export Report
+            <span className="hidden sm:inline">Export Report</span>
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <DollarSign className="w-6 h-6 text-primary" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2 md:p-3 bg-primary/10 rounded-lg">
+              <DollarSign className="w-5 h-5 text-primary" />
             </div>
-            <TrendingUp className="w-5 h-5 text-accent" />
+            <TrendingUp className="w-4 h-4 text-accent" />
           </div>
-          <div className="text-3xl text-foreground mb-1">AED 2.4M</div>
-          <div className="text-sm text-muted-foreground">Total Revenue</div>
-          <div className="text-sm text-accent mt-2">+15.3% vs last period</div>
+          <div className="text-xl md:text-3xl text-foreground mb-1">AED 2.4M</div>
+          <div className="text-xs text-muted-foreground">Total Revenue</div>
+          <div className="text-xs text-accent mt-1">+15.3% vs last period</div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-accent/10 rounded-lg">
-              <Users className="w-6 h-6 text-accent" />
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2 md:p-3 bg-accent/10 rounded-lg">
+              <Users className="w-5 h-5 text-accent" />
             </div>
-            <TrendingUp className="w-5 h-5 text-accent" />
+            <TrendingUp className="w-4 h-4 text-accent" />
           </div>
-          <div className="text-3xl text-foreground mb-1">342</div>
-          <div className="text-sm text-muted-foreground">Total Conversions</div>
-          <div className="text-sm text-accent mt-2">+8.2% vs last period</div>
+          <div className="text-xl md:text-3xl text-foreground mb-1">342</div>
+          <div className="text-xs text-muted-foreground">Total Conversions</div>
+          <div className="text-xs text-accent mt-1">+8.2% vs last period</div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-chart-3/10 rounded-lg">
-              <Target className="w-6 h-6" style={{ color: 'var(--chart-3)' }} />
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2 md:p-3 bg-chart-3/10 rounded-lg">
+              <Target className="w-5 h-5" style={{ color: 'var(--chart-3)' }} />
             </div>
-            <TrendingUp className="w-5 h-5 text-accent" />
+            <TrendingUp className="w-4 h-4 text-accent" />
           </div>
-          <div className="text-3xl text-foreground mb-1">26.6%</div>
-          <div className="text-sm text-muted-foreground">Conversion Rate</div>
-          <div className="text-sm text-accent mt-2">+2.1% vs last period</div>
+          <div className="text-xl md:text-3xl text-foreground mb-1">26.6%</div>
+          <div className="text-xs text-muted-foreground">Conversion Rate</div>
+          <div className="text-xs text-accent mt-1">+2.1% vs last period</div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-chart-4/10 rounded-lg">
-              <Calendar className="w-6 h-6" style={{ color: 'var(--chart-4)' }} />
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-2 md:p-3 bg-chart-4/10 rounded-lg">
+              <Calendar className="w-5 h-5" style={{ color: 'var(--chart-4)' }} />
             </div>
-            <TrendingUp className="w-5 h-5 text-accent" />
+            <TrendingUp className="w-4 h-4 text-accent" />
           </div>
-          <div className="text-3xl text-foreground mb-1">AED 7,018</div>
-          <div className="text-sm text-muted-foreground">Avg. Deal Size</div>
-          <div className="text-sm text-accent mt-2">+4.5% vs last period</div>
+          <div className="text-xl md:text-3xl text-foreground mb-1">AED 7,018</div>
+          <div className="text-xs text-muted-foreground">Avg. Deal Size</div>
+          <div className="text-xs text-accent mt-1">+4.5% vs last period</div>
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="mb-6">
-          <h2 className="text-lg text-foreground mb-1">Revenue Performance</h2>
-          <p className="text-sm text-muted-foreground">Monthly revenue vs targets</p>
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="mb-4 md:mb-6">
+          <h2 className="text-base md:text-lg text-foreground mb-1">Revenue Performance</h2>
+          <p className="text-xs md:text-sm text-muted-foreground">Monthly revenue vs targets</p>
         </div>
-        <div className="h-80">
+        <div className="h-56 md:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={monthlyRevenueData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="month" stroke="#64748B" />
-              <YAxis stroke="#64748B" />
+              <XAxis dataKey="month" stroke="#64748B" tick={{ fontSize: 12 }} />
+              <YAxis stroke="#64748B" tick={{ fontSize: 12 }} />
               <Tooltip />
               <Legend />
               <Bar dataKey="revenue" fill="#3B82F6" name="Actual Revenue" radius={[8, 8, 0, 0]} />
@@ -121,11 +121,11 @@ export const ReportsScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="mb-6">
-            <h2 className="text-lg text-foreground mb-1">Supervisor Performance</h2>
-            <p className="text-sm text-muted-foreground">Lead conversion by supervisor</p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="mb-4 md:mb-6">
+            <h2 className="text-base md:text-lg text-foreground mb-1">Supervisor Performance</h2>
+            <p className="text-xs md:text-sm text-muted-foreground">Lead conversion by supervisor</p>
           </div>
           <div className="space-y-4">
             {supervisorPerformanceData.map((supervisor, index) => (
@@ -150,10 +150,10 @@ export const ReportsScreen: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="mb-6">
-            <h2 className="text-lg text-foreground mb-1">Package Breakdown</h2>
-            <p className="text-sm text-muted-foreground">Revenue by service package</p>
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="mb-4 md:mb-6">
+            <h2 className="text-base md:text-lg text-foreground mb-1">Package Breakdown</h2>
+            <p className="text-xs md:text-sm text-muted-foreground">Revenue by service package</p>
           </div>
           <div className="space-y-4">
             {packageBreakdownData.map((pkg, index) => (

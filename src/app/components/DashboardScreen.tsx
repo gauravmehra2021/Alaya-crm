@@ -72,20 +72,20 @@ const recentActivity = [
 
 export const DashboardScreen: React.FC = () => {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       <div>
         <h1 className="text-2xl text-foreground mb-1">Dashboard</h1>
         <p className="text-muted-foreground">Overview of your clinic performance</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {kpiData.map((kpi) => {
           const Icon = kpi.icon;
           const TrendIcon = kpi.trend === 'up' ? TrendingUp : TrendingDown;
           const trendColor = kpi.trend === 'up' ? 'text-accent' : 'text-destructive';
 
           return (
-            <div key={kpi.title} className="bg-card border border-border rounded-xl p-6">
+            <div key={kpi.title} className="bg-card border border-border rounded-xl p-4 md:p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className={`p-3 bg-${kpi.color}/10 rounded-lg`}>
                   <Icon className={`w-6 h-6 text-${kpi.color}`} style={{ color: `var(--${kpi.color})` }} />
@@ -96,7 +96,7 @@ export const DashboardScreen: React.FC = () => {
                 </div>
               </div>
               <div>
-                <div className="text-3xl text-foreground mb-1">{kpi.value}</div>
+                <div className="text-2xl md:text-3xl text-foreground mb-1">{kpi.value}</div>
                 <div className="text-sm text-muted-foreground">{kpi.title}</div>
               </div>
             </div>
@@ -104,13 +104,13 @@ export const DashboardScreen: React.FC = () => {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="mb-4 md:mb-6">
             <h2 className="text-lg text-foreground mb-1">Lead Sources</h2>
             <p className="text-sm text-muted-foreground">Distribution of lead channels</p>
           </div>
-          <div className="h-80">
+          <div className="h-56 md:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -119,7 +119,7 @@ export const DashboardScreen: React.FC = () => {
                   cy="50%"
                   labelLine={false}
                   label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={100}
+                  outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
                 >
@@ -131,7 +131,7 @@ export const DashboardScreen: React.FC = () => {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-border">
+          <div className="grid grid-cols-3 gap-2 md:gap-4 mt-4 pt-4 border-t border-border">
             {leadSourceData.map((source) => (
               <div key={source.name} className="text-center">
                 <div className="flex items-center justify-center gap-2 mb-1">
@@ -144,12 +144,12 @@ export const DashboardScreen: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-card border border-border rounded-xl p-6">
-          <div className="mb-6">
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+          <div className="mb-4 md:mb-6">
             <h2 className="text-lg text-foreground mb-1">Monthly Conversions</h2>
             <p className="text-sm text-muted-foreground">Leads vs conversions trend</p>
           </div>
-          <div className="h-80">
+          <div className="h-56 md:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={monthlyConversionsData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
@@ -165,25 +165,25 @@ export const DashboardScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="mb-4 md:mb-6">
           <h2 className="text-lg text-foreground mb-1">Recent Activity</h2>
           <p className="text-sm text-muted-foreground">Latest updates and actions</p>
         </div>
         <div className="space-y-4">
           {recentActivity.map((activity) => (
-            <div key={activity.id} className="flex items-center gap-4 pb-4 border-b border-border last:border-0 last:pb-0">
+            <div key={activity.id} className="flex items-start md:items-center gap-3 md:gap-4 pb-4 border-b border-border last:border-0 last:pb-0">
               <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
                 {activity.type === 'lead' && <UserPlus className="w-5 h-5 text-primary" />}
                 {activity.type === 'appointment' && <Clock className="w-5 h-5 text-primary" />}
                 {activity.type === 'conversion' && <UserCheck className="w-5 h-5 text-accent" />}
                 {activity.type === 'reminder' && <Clock className="w-5 h-5 text-chart-3" />}
               </div>
-              <div className="flex-1">
-                <div className="text-foreground">{activity.action}</div>
-                <div className="text-sm text-muted-foreground">by {activity.user}</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-foreground text-sm md:text-base">{activity.action}</div>
+                <div className="text-xs md:text-sm text-muted-foreground">by {activity.user}</div>
               </div>
-              <div className="text-sm text-muted-foreground">{activity.time}</div>
+              <div className="text-xs md:text-sm text-muted-foreground whitespace-nowrap">{activity.time}</div>
             </div>
           ))}
         </div>

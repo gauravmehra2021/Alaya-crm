@@ -134,33 +134,33 @@ export const LeadsScreen: React.FC<LeadsScreenProps> = ({ userRole }) => {
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl text-foreground mb-1">Leads Management</h1>
-          <p className="text-muted-foreground">Track and manage all your leads</p>
+          <h1 className="text-xl md:text-2xl text-foreground mb-1">Leads Management</h1>
+          <p className="text-sm text-muted-foreground">Track and manage all your leads</p>
         </div>
-        <div className="flex gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors">
+        <div className="flex flex-wrap gap-2">
+          <button className="flex items-center gap-1.5 px-3 py-2 text-sm border border-border rounded-lg hover:bg-muted transition-colors">
             <Upload className="w-4 h-4" />
-            Import Excel
+            <span className="hidden sm:inline">Import Excel</span>
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-2 text-sm border border-border rounded-lg hover:bg-muted transition-colors">
             <Download className="w-4 h-4" />
-            Export
+            <span className="hidden sm:inline">Export</span>
           </button>
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Add Lead
+            <span className="hidden sm:inline">Add Lead</span>
           </button>
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="flex flex-col md:flex-row gap-3 mb-4 md:mb-6">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
@@ -195,57 +195,57 @@ export const LeadsScreen: React.FC<LeadsScreenProps> = ({ userRole }) => {
           </select>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto -mx-4 md:mx-0">
+          <table className="w-full min-w-[640px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 text-muted-foreground">Name</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Contact</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Source</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Status</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Assigned To</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Created</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Actions</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Name</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Contact</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Source</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Status</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Assigned To</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Created</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredLeads.map((lead) => (
                 <tr key={lead.id} className="border-b border-border hover:bg-muted/50 transition-colors">
-                  <td className="py-4 px-4">
-                    <div className="text-foreground">{lead.name}</div>
+                  <td className="py-3 px-4">
+                    <div className="text-sm text-foreground whitespace-nowrap">{lead.name}</div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="text-sm text-foreground">{lead.phone}</div>
+                  <td className="py-3 px-4">
+                    <div className="text-xs text-foreground whitespace-nowrap">{lead.phone}</div>
                     <div className="text-xs text-muted-foreground">{lead.email}</div>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className={`px-3 py-1 rounded-full text-xs ${sourceColors[lead.source]}`}>
+                  <td className="py-3 px-4">
+                    <span className={`px-2 py-1 rounded-full text-xs whitespace-nowrap ${sourceColors[lead.source]}`}>
                       {lead.source}
                     </span>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className={`px-3 py-1 rounded-full text-xs border ${statusColors[lead.status]}`}>
+                  <td className="py-3 px-4">
+                    <span className={`px-2 py-1 rounded-full text-xs border whitespace-nowrap ${statusColors[lead.status]}`}>
                       {lead.status}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-foreground">{lead.assignedTo}</td>
-                  <td className="py-4 px-4 text-muted-foreground">{lead.createdAt}</td>
-                  <td className="py-4 px-4">
-                    <div className="flex gap-2">
+                  <td className="py-3 px-4 text-sm text-foreground whitespace-nowrap">{lead.assignedTo}</td>
+                  <td className="py-3 px-4 text-xs text-muted-foreground whitespace-nowrap">{lead.createdAt}</td>
+                  <td className="py-3 px-4">
+                    <div className="flex gap-1">
                       <button
                         onClick={() => handleViewLead(lead)}
-                        className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                        className="p-1.5 hover:bg-secondary rounded-lg transition-colors"
                         title="View Details"
                       >
                         <Eye className="w-4 h-4 text-primary" />
                       </button>
-                      <button className="p-2 hover:bg-secondary rounded-lg transition-colors" title="Edit">
+                      <button className="p-1.5 hover:bg-secondary rounded-lg transition-colors" title="Edit">
                         <Edit className="w-4 h-4 text-muted-foreground" />
                       </button>
                       {userRole === 'Admin' && (
                         <button
                           onClick={() => handleDeleteLead(lead.id)}
-                          className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                          className="p-1.5 hover:bg-secondary rounded-lg transition-colors"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4 text-destructive" />
@@ -269,8 +269,8 @@ export const LeadsScreen: React.FC<LeadsScreenProps> = ({ userRole }) => {
       {showDetailModal && selectedLead && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-card rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-border flex items-center justify-between">
-              <h2 className="text-xl text-foreground">Lead Details</h2>
+            <div className="p-4 md:p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-lg md:text-xl text-foreground">Lead Details</h2>
               <button
                 onClick={() => setShowDetailModal(false)}
                 className="p-2 hover:bg-muted rounded-lg transition-colors"
@@ -278,8 +278,8 @@ export const LeadsScreen: React.FC<LeadsScreenProps> = ({ userRole }) => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm text-muted-foreground">Name</label>
                   <div className="text-foreground mt-1">{selectedLead.name}</div>

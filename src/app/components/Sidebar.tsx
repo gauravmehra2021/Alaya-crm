@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   LayoutDashboard,
   Users,
@@ -9,6 +9,8 @@ import {
   UserCircle,
   ChevronLeft,
   ChevronRight,
+  Menu,
+  X,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,58 +41,93 @@ const navigationItems = [
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, collapsed, onToggleCollapse }) => {
-  let navigate = useNavigate();
-  console.log("activeTabactiveTab", activeTab)
+  const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleNav = (item: NavigationItem) => {
+    onTabChange(item);
+    navigate(`/${item.toLowerCase()}`);
+    setMobileOpen(false);
+  };
+
+  const NavItems = () => (
+    <>
+      {navigationItems.map((item) => {
+        const Icon = item.icon;
+        const isActive = activeTab === item.id;
+        return (
+          <button
+            key={item.id}
+            onClick={() => handleNav(item.id)}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              isActive ? 'bg-sidebar-primary text-sidebar-primary-foreground' : 'text-sidebar-foreground hover:bg-sidebar-accent'
+            }`}
+            title={collapsed ? item.label : undefined}
+          >
+            <Icon className="w-5 h-5 flex-shrink-0" />
+            {!collapsed && <span>{item.label}</span>}
+          </button>
+        );
+      })}
+    </>
+  );
+
   return (
-    <div
-      className={`${collapsed ? 'w-20' : 'w-64'
-        } bg-sidebar border-r border-sidebar-border flex flex-col transition-all duration-300`}
-    >
-      <div className="p-6 border-b border-sidebar-border flex items-center justify-between">
-        {!collapsed && (
-          <div>
-            <h2 className="text-lg text-sidebar-foreground">HT CRM</h2>
-            <p className="text-xs text-muted-foreground">Hair Transplant</p>
+    <>
+      {/* Mobile top bar toggle */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-sidebar rounded-lg border border-sidebar-border"
+        onClick={() => setMobileOpen(true)}
+      >
+        <Menu className="w-5 h-5 text-sidebar-foreground" />
+      </button>
+
+      {/* Mobile drawer overlay */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-40 flex">
+          <div className="fixed inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
+          <div className="relative z-50 w-64 bg-sidebar border-r border-sidebar-border flex flex-col">
+            <div className="p-6 border-b border-sidebar-border flex items-center justify-between">
+              <div>
+                <h2 className="text-lg text-sidebar-foreground">HT CRM</h2>
+                <p className="text-xs text-muted-foreground">Hair Transplant</p>
+              </div>
+              <button onClick={() => setMobileOpen(false)} className="p-2 hover:bg-sidebar-accent rounded-lg">
+                <X className="w-5 h-5 text-sidebar-foreground" />
+              </button>
+            </div>
+            <nav className="flex-1 p-4 space-y-1">
+              <NavItems />
+            </nav>
           </div>
-        )}
-        <button
-          onClick={onToggleCollapse}
-          className="p-2 hover:bg-sidebar-accent rounded-lg transition-colors"
-        >
-          {collapsed ? (
-            <ChevronRight className="w-5 h-5 text-sidebar-foreground" />
-          ) : (
-            <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
+        </div>
+      )}
+
+      {/* Desktop sidebar */}
+      <div
+        className={`hidden md:flex ${
+          collapsed ? 'w-20' : 'w-64'
+        } bg-sidebar border-r border-sidebar-border flex-col transition-all duration-300`}
+      >
+        <div className="p-6 border-b border-sidebar-border flex items-center justify-between">
+          {!collapsed && (
+            <div>
+              <h2 className="text-lg text-sidebar-foreground">HT CRM</h2>
+              <p className="text-xs text-muted-foreground">Hair Transplant</p>
+            </div>
           )}
-        </button>
+          <button onClick={onToggleCollapse} className="p-2 hover:bg-sidebar-accent rounded-lg transition-colors">
+            {collapsed ? (
+              <ChevronRight className="w-5 h-5 text-sidebar-foreground" />
+            ) : (
+              <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
+            )}
+          </button>
+        </div>
+        <nav className="flex-1 p-4 space-y-1">
+          <NavItems />
+        </nav>
       </div>
-
-      <nav className="flex-1 p-4 space-y-1">
-        {navigationItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeTab === item.id;
-
-          return (
-            <button
-              key={item.id}
-              onClick={() => {
-
-                onTabChange(item.id)
-                navigate(`/${item.id.toLowerCase()}`)
-              }
-              }
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
-                  ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                  : 'text-sidebar-foreground hover:bg-sidebar-accent'
-                }`}
-              title={collapsed ? item.label : undefined}
-            >
-              <Icon className="w-5 h-5 flex-shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
-            </button>
-          );
-        })}
-      </nav>
-    </div>
+    </>
   );
 };

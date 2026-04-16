@@ -97,23 +97,23 @@ export const AccountsScreen: React.FC<AccountsScreenProps> = ({ userRole }) => {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl text-foreground mb-1">Accounts & Users</h1>
-          <p className="text-muted-foreground">Manage user accounts and permissions</p>
+          <h1 className="text-xl md:text-2xl text-foreground mb-1">Accounts & Users</h1>
+          <p className="text-sm text-muted-foreground">Manage user accounts and permissions</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
         >
           <Plus className="w-4 h-4" />
-          Create Account
+          <span className="hidden sm:inline">Create Account</span>
         </button>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="mb-4 md:mb-6">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
@@ -126,42 +126,42 @@ export const AccountsScreen: React.FC<AccountsScreenProps> = ({ userRole }) => {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto -mx-4 md:mx-0">
+          <table className="w-full min-w-[640px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 text-muted-foreground">Name</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Email</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Phone</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Role</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Status</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Created</th>
-                <th className="text-left py-3 px-4 text-muted-foreground">Actions</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Name</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Email</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Phone</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Role</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Status</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Created</th>
+                <th className="text-left py-3 px-4 text-xs text-muted-foreground">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user.id} className="border-b border-border hover:bg-muted/50 transition-colors">
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm">
+                  <td className="py-3 px-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-xs">
                           {user.name.split(' ').map((n) => n[0]).join('')}
                         </span>
                       </div>
-                      <span className="text-foreground">{user.name}</span>
+                      <span className="text-sm text-foreground whitespace-nowrap">{user.name}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-foreground">{user.email}</td>
-                  <td className="py-4 px-4 text-foreground">{user.phone}</td>
-                  <td className="py-4 px-4">
+                  <td className="py-3 px-4 text-xs text-foreground whitespace-nowrap">{user.email}</td>
+                  <td className="py-3 px-4 text-xs text-foreground whitespace-nowrap">{user.phone}</td>
+                  <td className="py-3 px-4">
                     <select
                       value={user.role}
                       onChange={(e) => {
                         const newRole = e.target.value as User['role'];
                         setUsers(users.map((u) => (u.id === user.id ? { ...u, role: newRole } : u)));
                       }}
-                      className="px-3 py-1 bg-background border border-border rounded-lg text-sm"
+                      className="px-2 py-1 bg-background border border-border rounded-lg text-xs"
                     >
                       <option value="Admin">Admin</option>
                       <option value="Manager">Manager</option>
@@ -169,10 +169,10 @@ export const AccountsScreen: React.FC<AccountsScreenProps> = ({ userRole }) => {
                       <option value="Front Desk">Front Desk</option>
                     </select>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-3 px-4">
                     <button
                       onClick={() => toggleUserStatus(user.id)}
-                      className={`px-3 py-1 rounded-full text-xs border ${
+                      className={`px-2 py-1 rounded-full text-xs border whitespace-nowrap ${
                         user.active
                           ? 'bg-green-100 text-green-700 border-green-200'
                           : 'bg-red-100 text-red-700 border-red-200'
@@ -181,9 +181,9 @@ export const AccountsScreen: React.FC<AccountsScreenProps> = ({ userRole }) => {
                       {user.active ? 'Active' : 'Inactive'}
                     </button>
                   </td>
-                  <td className="py-4 px-4 text-muted-foreground">{user.createdAt}</td>
-                  <td className="py-4 px-4">
-                    <button className="p-2 hover:bg-secondary rounded-lg transition-colors" title="Edit">
+                  <td className="py-3 px-4 text-xs text-muted-foreground whitespace-nowrap">{user.createdAt}</td>
+                  <td className="py-3 px-4">
+                    <button className="p-1.5 hover:bg-secondary rounded-lg transition-colors" title="Edit">
                       <Edit className="w-4 h-4 text-muted-foreground" />
                     </button>
                   </td>

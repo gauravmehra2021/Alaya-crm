@@ -8,7 +8,7 @@ export const Navbar: React.FC = () => {
   const [notifications] = useState(3);
 
   return (
-    <div className="h-16 bg-card border-b border-border flex items-center justify-between px-6">
+    <div className="h-16 bg-card border-b border-border flex items-center justify-between px-4 md:px-6 pl-16 md:pl-6">
       <div className="flex-1 max-w-xl">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />

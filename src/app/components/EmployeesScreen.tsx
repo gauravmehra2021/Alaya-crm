@@ -86,22 +86,22 @@ export const EmployeesScreen: React.FC<EmployeesScreenProps> = ({ userRole }) =>
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl text-foreground mb-1">Employees</h1>
-          <p className="text-muted-foreground">Manage your clinic staff</p>
+          <h1 className="text-xl md:text-2xl text-foreground mb-1">Employees</h1>
+          <p className="text-sm text-muted-foreground">Manage your clinic staff</p>
         </div>
         {userRole === 'Admin' && (
-          <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
             <Plus className="w-4 h-4" />
-            Add Employee
+            <span className="hidden sm:inline">Add Employee</span>
           </button>
         )}
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6">
+        <div className="flex flex-col md:flex-row gap-3 mb-4 md:mb-6">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
@@ -134,9 +134,9 @@ export const EmployeesScreen: React.FC<EmployeesScreenProps> = ({ userRole }) =>
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filteredEmployees.map((employee) => (
-            <div key={employee.id} className="bg-background border border-border rounded-xl p-6">
+            <div key={employee.id} className="bg-background border border-border rounded-xl p-4 md:p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
                   <span className="text-white text-lg">
