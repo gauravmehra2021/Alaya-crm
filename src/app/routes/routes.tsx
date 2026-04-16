@@ -11,6 +11,7 @@ import ProtectedPublicRoute from "./ProtectedPublicRoute";
 import ProtectedPrivateRoute from "./ProtectedPrivateRoute";
 import { LoginScreen } from "../components/LoginScreen";
 import { OTPScreen } from "../components/OTPScreen";
+import { NotFoundScreen } from "../components/NotFoundScreen";
 import { useAuth } from "../components/AuthContext";
 
 
@@ -42,6 +43,7 @@ export const AppRoutes = () => {
         </Route>
       </Route>
 
+      <Route path="*" element={<NotFoundScreen />} />
     </Routes>
   );
 };
